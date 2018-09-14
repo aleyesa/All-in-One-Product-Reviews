@@ -4,8 +4,7 @@
   "description": "Product Review Application",
   "main": "server.js",
   "scripts": {
-    "test": "mocha",
-    "start": "nodemon server.js"
+    "test": "mocha"
   },
   "author": "Aaron Leyesa",
   "license": "ISC",
