@@ -3,7 +3,7 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.get('/index.html', (req, res) => {
+app.get('/', (req, res) => {
   res.status(200).json(res.statusMessage);
 });
 

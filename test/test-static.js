@@ -21,7 +21,7 @@ describe('All In One Product Review Application', () => {
 
   it('should get status 200 when loading root url', () => {
     return chai.request(app)
-      .get('/index.html')
+      .get('/')
       .then((res) => {
         expect(res).to.have.status(200);
       });
