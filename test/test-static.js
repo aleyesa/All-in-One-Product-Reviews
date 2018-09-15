@@ -1,12 +1,19 @@
-const express = require('express');
+// import chai from 'chai';
+// import chaiHttp from 'chai-http';
+// import {
+//   app,
+//   runServer,
+//   closeServer
+// } from '../server';
+
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-
-const { app, runServer, closeServer } = require('../server');
+const { app,
+  runServer,
+  closeServer,
+} = require('../server');
 
 const expect = chai.expect;
-
-let server;
 
 chai.use(chaiHttp);
 
