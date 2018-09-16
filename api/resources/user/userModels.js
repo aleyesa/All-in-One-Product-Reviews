@@ -27,7 +27,8 @@ const productReviewPostSchema = new Schema({
   images: [
     String
     ],
-  main: String,
+  theGood: String,
+  theBad: String,
   rating: String,
   date: Date,
   comments: [String]
@@ -56,4 +57,13 @@ userSchema.post('save', (err, user, next) => {
   next();
 });
 
-export default { User, ProductReviewPost };
+// const headPhones = new ProductReviewPost({
+//   title: 'Jaybirds X3',
+//   images: ['123.jpg'],
+//   theGood: 'Water resistant, Great sound quality, Great design.',
+//   theBad: 'Certain technique to get earbuds to stay in ear.',
+//   date: Date.now(),
+//   comments: ''
+// });
+export { User, ProductReviewPost };
+

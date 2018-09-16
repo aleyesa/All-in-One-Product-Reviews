@@ -1,5 +1,8 @@
 //import
-import User from './userModels';
+import { 
+  User,
+  ProductReviewPost
+ } from './userModels';
 
 //used for get request to get all users and some of the users account info.
 const getAllUsers = (req, res) => {
@@ -64,16 +67,30 @@ const deleteUser = (req, res) => {
   });
 };
 
-const getPosts = (req, res) => {
- res.json('getting a list of current user posts');
-};
-
 const getPost = (req, res) => {
   res.json('getting a selected user posts');
  };
 
+const getPosts = (req, res) => {
+  ProductReviewPost
+  .find()
+  .then(posts => res.json(posts));
+ };
+
 const createPost = (req, res) => {
-  res.json('create post response works.');
+  ProductReviewPost
+  .create(
+    {
+      title: req.body.title,
+      images: req.body.images,
+      theGood: req.body.theGood,
+      theBad: req.body.theBad,
+      date: Date.now(),
+      comments: req.body.comments
+    })
+  .then(post => {
+    res.json(post);
+  });
 };
 
 const deletePost = (req, res) => {

@@ -7,6 +7,7 @@ import {
   updateUser, 
   deleteUser,
   getPost,
+  getPosts,
   createPost,
   deletePost,
   editPost,
@@ -26,16 +27,15 @@ userRouter.route('/user/:id')
 .put(updateUser)
 .delete(deleteUser);
 
-//create a PRPost
-
-
 //show PRPost
-userRouter.route('/user/post')
-.get(getPost);
+userRouter.route('/post')
+.get(getPosts)
+.post(createPost);
 
-//edit PRPost
-//delete PRPost
-
-//reply to a PRPost
+userRouter.route('/post/:id')
+.get(getPost)
+.post(replyPost)
+.put(editPost)
+.delete(deletePost);
 
 export default userRouter;
