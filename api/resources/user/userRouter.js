@@ -5,7 +5,12 @@ import {
   getUser,                  
   createUser, 
   updateUser, 
-  deleteUser 
+  deleteUser,
+  getPost,
+  createPost,
+  deletePost,
+  editPost,
+  replyPost
 } from './userController';
 
 //import userRouter
@@ -20,5 +25,17 @@ userRouter.route('/user/:id')
 .get(getUser)
 .put(updateUser)
 .delete(deleteUser);
+
+//create a PRPost
+
+
+//show PRPost
+userRouter.route('/user/post')
+.get(getPost);
+
+//edit PRPost
+//delete PRPost
+
+//reply to a PRPost
 
 export default userRouter;

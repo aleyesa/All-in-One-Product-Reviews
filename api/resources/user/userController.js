@@ -64,10 +64,40 @@ const deleteUser = (req, res) => {
   });
 };
 
+const getPosts = (req, res) => {
+ res.json('getting a list of current user posts');
+};
+
+const getPost = (req, res) => {
+  res.json('getting a selected user posts');
+ };
+
+const createPost = (req, res) => {
+  res.json('create post response works.');
+};
+
+const deletePost = (req, res) => {
+  res.json('delete post response works');
+};
+
+const editPost = (req, res) => {
+  res.json('edit post response works');
+};
+
+const replyPost = (req, res) => {
+  res.json('reply post response works');
+};
+
 export { 
   getAllUsers,
   getUser, 
   createUser, 
   updateUser, 
-  deleteUser 
+  deleteUser,
+  getPost,
+  getPosts,
+  createPost,
+  deletePost,
+  editPost,
+  replyPost
 };

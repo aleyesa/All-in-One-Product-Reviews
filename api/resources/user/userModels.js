@@ -22,10 +22,16 @@ const userSchema = new Schema({
   }
 });
 
-//email: { type: String, required: 'Email is mandatory.'
-// , unique: true, trim: true,
-//  validate: [ email => emailRegexPattern.test(email),
-//    'Please enter a valid email address.' ] },
+const productReviewPostSchema = new Schema({
+  title: String,
+  images: [
+    String
+    ],
+  main: String,
+  rating: String,
+  date: Date,
+  comments: [String]
+});
 
 userSchema.methods.comparePw = function(pw, pwHash) {
   return bcrypt.compare(pw, pwHash);
@@ -43,10 +49,11 @@ userSchema.statics.hashPassword = function(password) {
 
 //creates a model of userSchema
 const User = mongoose.model('User', userSchema);
+const ProductReviewPost = mongoose.model('PRPost', productReviewPostSchema);
 
 userSchema.post('save', (err, user, next) => {
   console.log(err);
   next();
 });
 
-export default User;
+export default { User, ProductReviewPost };
