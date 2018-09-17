@@ -1,7 +1,6 @@
 import express from 'express';
 import passport from 'passport';
 import strategies from './strategies';
-
 import { 
   registerUser,
   validateLogin,

@@ -7,13 +7,16 @@ import mongoose from 'mongoose';
 const app = express();
 let server;
 
+//Use static assets
 app.use(express.static('public'));
 
+//Loads homepage
 app.get('/', (req, res) => {
   res.status(200).sendFile(__dirname + '/public/index.html');
   res.status(200).json(res.statusMessage);
 });
 
+//Connect to test database
 mongoose.connect(TEST_DATABASE, { useNewUrlParser: true }, (err) => {
   if(err) {
   console.log(err);
@@ -22,7 +25,9 @@ mongoose.connect(TEST_DATABASE, { useNewUrlParser: true }, (err) => {
   }
 });
 
+//load and use middlewares
 appMiddleware(app, express);
+//use express app
 api(app);
 
 function runServer() {
@@ -56,6 +61,8 @@ if (require.main === module) {
   runServer().catch(err => console.error(err));
 };
 
-export { app,
-   runServer,
-   closeServer };
+export { 
+  app,
+  runServer,
+  closeServer 
+};

@@ -2,9 +2,9 @@
 import { 
   User,
   ProductReviewPost,
+  Reply,
   Comment
  } from './userModels';
-import { EWOULDBLOCK } from 'constants';
 
 //used for get request to get all users and some of the users account info.
 const getAllUsers = (req, res) => {
@@ -28,25 +28,6 @@ const getUser = (req, res) => {
     console.log(`${err}, user id not found.`)
   });
 };
-
-  const createUser = (req, res) => {
-    // User.comparePw(req.body.password, User.hashPassword(req.body.password));
-    User.hashPassword(req.body.password, 10)
-    .then(hash => {
-      User
-      .create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        username: req.body.username,
-        password: hash,
-        email: req.body.email
-      })
-      .then(user =>
-        res.json(user + ' has been created.')
-      )
-      .catch(err => res.status(400).json(err.message));
-    });
-  };
 
 //Used for put request to update a users account info.
 const updateUser = (req, res) => {
@@ -95,26 +76,37 @@ const editPost = (req, res) => {
   res.json('edit post response works');
 };
 
-const replyPost = (req, res) => {
-  const newComment = 
-    Comment
-    .create({comment: req.body.comment})
-    .then(comment => comment);
-
-  // ProductReviewPost.findByIdAndUpdate(req.params.id, req.body)
-  // .then(post => res.json(post));
+const addComment = (req, res) => {
+  Comment
+  .create( { comment: req.body.comment } )
+  .then(comment => {
+    ProductReviewPost
+    .findById(req.params.id)
+    .then(post => {
+      post.comments.push(comment);
+      ProductReviewPost.findByIdAndUpdate(req.params.id, { comments: post.comments } )
+      .then(post => res.json(post));
+    })
+  });
 };
 
 //create new comment document then update the post document?
 const addReply = (req, res) => {
-  ProductReviewPost.find(req.params.id)
-  .then(comment => res.json(comment));
+  Reply
+  .create( { reply: req.body.reply } )
+  .then(reply => {
+    Comment.findById(req.params.id)
+    .then(comment => {
+      comment.replies.push(reply);
+      Comment.findByIdAndUpdate(req.params.id, { replies: comment.replies } )
+      .then(res.json(comment));
+    });
+  })
 };
 
 export { 
   getAllUsers,
   getUser, 
-  createUser, 
   updateUser, 
   deleteUser,
   getPost,
@@ -122,6 +114,6 @@ export {
   createPost,
   deletePost,
   editPost,
-  replyPost,
+  addComment,
   addReply
 };

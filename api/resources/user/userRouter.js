@@ -3,7 +3,6 @@ import express from 'express';
 import { 
   getAllUsers,
   getUser,                  
-  createUser, 
   updateUser, 
   deleteUser,
   getPost,
@@ -11,7 +10,7 @@ import {
   createPost,
   deletePost,
   editPost,
-  replyPost,
+  addComment,
   addReply
 } from './userController';
 
@@ -20,7 +19,6 @@ const userRouter = express.Router();
 
 //route to get a list of all users
 userRouter.get('/user', getAllUsers);
-userRouter.post('/user', createUser);
 
 //main route for requests in regards to users by id
 userRouter.route('/user/:id')
@@ -35,11 +33,10 @@ userRouter.route('/post')
 
 userRouter.route('/post/:id')
 .get(getPost)
-.post(replyPost)
+.post(addComment)
 .put(editPost)
 .delete(deletePost);
 
 userRouter.put('/reply/:id', addReply);
-
 
 export default userRouter;

@@ -21,7 +21,6 @@ const localStrategy = new LocalStrategy.Strategy((username, password, callbackfn
   })
 });
 
-
 const jwtStrategy = new Strategy({
   secretOrKey: JWT_SECRET,
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),

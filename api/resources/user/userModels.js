@@ -5,7 +5,10 @@ mongoose.Promise = global.Promise;
 
 const Schema = mongoose.Schema;
 
-//User schema that looks for username, password, email
+//Tasks: 
+// -regular expression if a user wants to add images.
+
+//User Schema to hold username and password
 const userSchema = new Schema({
   username: { 
     type: String,
@@ -22,47 +25,54 @@ const userSchema = new Schema({
   }
 });
 
-//create a new schema that holds comments made by users
-//This schema basically holds an id to help get to that
-//specific comment
-//I can also use this comment id to get the blog post it
-// is listed on
-const commentSchema = new Schema({
-  comment: String,
-  replies: {
-    reply: [String]
-  }
+//Reply Schema to hold replies
+const replySchema = new Schema({
+  reply: String
 });
 
+//Comment Schema to hold a main comment followed by a set of replies
+const commentSchema = new Schema({
+  comment: String,
+  replies: [replySchema]
+});
+
+//Product Review Post Schema to hold the 
+//title, images, pros, cons, rating, date, and comments
 const productReviewPostSchema = new Schema({
-  title: String,
-  images: [
-    String
-    ],
-  theGood: String,
-  theBad: String,
-  rating: String,
+  title: {
+    type: String,
+    required: 'Title is needed for product review post.'
+  },
+  images: [String],
+  theGood: {
+    type: String,
+    required: 'Need input on what makes this product awesome.'
+  },
+  theBad: {
+    type: String,
+    required: 'Need input on the bad parts of this product.'
+  },
+  rating: {
+    type: String,
+    required: 'Please input your rating on this product.'
+  },
   date: Date,
   comments: [commentSchema]
 });
 
+//functions to help validate and secure passwords.
 userSchema.methods.comparePw = function(pw, pwHash) {
   return bcrypt.compare(pw, pwHash);
-};
-
-userSchema.methods.serialize = function(user) {
-  return {
-    username: user.username
-  } 
 };
 
 userSchema.statics.hashPassword = function(password) {
   return bcrypt.hash(password, 10);
 };
 
-//creates a model of userSchema
+//creates a model for each schema
 const User = mongoose.model('User', userSchema);
 const ProductReviewPost = mongoose.model('PRPost', productReviewPostSchema);
+const Reply = mongoose.model('Reply', replySchema);
 const Comment = mongoose.model('Comment', commentSchema);
 
 userSchema.post('save', (err, user, next) => {
@@ -70,13 +80,5 @@ userSchema.post('save', (err, user, next) => {
   next();
 });
 
-// const headPhones = new ProductReviewPost({
-//   title: 'Jaybirds X3',
-//   images: ['123.jpg'],
-//   theGood: 'Water resistant, Great sound quality, Great design.',
-//   theBad: 'Certain technique to get earbuds to stay in ear.',
-//   date: Date.now(),
-//   comments: ''
-// });
-export { User, ProductReviewPost, Comment };
+export { User, ProductReviewPost, Reply, Comment };
 
