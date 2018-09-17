@@ -22,6 +22,18 @@ const userSchema = new Schema({
   }
 });
 
+//create a new schema that holds comments made by users
+//This schema basically holds an id to help get to that
+//specific comment
+//I can also use this comment id to get the blog post it
+// is listed on
+const commentSchema = new Schema({
+  comment: String,
+  replies: {
+    reply: [String]
+  }
+});
+
 const productReviewPostSchema = new Schema({
   title: String,
   images: [
@@ -31,7 +43,7 @@ const productReviewPostSchema = new Schema({
   theBad: String,
   rating: String,
   date: Date,
-  comments: [String]
+  comments: [commentSchema]
 });
 
 userSchema.methods.comparePw = function(pw, pwHash) {
@@ -51,6 +63,7 @@ userSchema.statics.hashPassword = function(password) {
 //creates a model of userSchema
 const User = mongoose.model('User', userSchema);
 const ProductReviewPost = mongoose.model('PRPost', productReviewPostSchema);
+const Comment = mongoose.model('Comment', commentSchema);
 
 userSchema.post('save', (err, user, next) => {
   console.log(err);
@@ -65,5 +78,5 @@ userSchema.post('save', (err, user, next) => {
 //   date: Date.now(),
 //   comments: ''
 // });
-export { User, ProductReviewPost };
+export { User, ProductReviewPost, Comment };
 

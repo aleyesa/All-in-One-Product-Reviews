@@ -11,7 +11,8 @@ import {
   createPost,
   deletePost,
   editPost,
-  replyPost
+  replyPost,
+  addReply
 } from './userController';
 
 //import userRouter
@@ -37,5 +38,8 @@ userRouter.route('/post/:id')
 .post(replyPost)
 .put(editPost)
 .delete(deletePost);
+
+userRouter.put('/reply/:id', addReply);
+
 
 export default userRouter;

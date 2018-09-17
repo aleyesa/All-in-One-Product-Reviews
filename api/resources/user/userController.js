@@ -1,8 +1,10 @@
 //import
 import { 
   User,
-  ProductReviewPost
+  ProductReviewPost,
+  Comment
  } from './userModels';
+import { EWOULDBLOCK } from 'constants';
 
 //used for get request to get all users and some of the users account info.
 const getAllUsers = (req, res) => {
@@ -79,15 +81,7 @@ const getPosts = (req, res) => {
 
 const createPost = (req, res) => {
   ProductReviewPost
-  .create(
-    {
-      title: req.body.title,
-      images: req.body.images,
-      theGood: req.body.theGood,
-      theBad: req.body.theBad,
-      date: Date.now(),
-      comments: req.body.comments
-    })
+  .create(req.body)
   .then(post => {
     res.json(post);
   });
@@ -102,7 +96,19 @@ const editPost = (req, res) => {
 };
 
 const replyPost = (req, res) => {
-  res.json('reply post response works');
+  const newComment = 
+    Comment
+    .create({comment: req.body.comment})
+    .then(comment => comment);
+
+  // ProductReviewPost.findByIdAndUpdate(req.params.id, req.body)
+  // .then(post => res.json(post));
+};
+
+//create new comment document then update the post document?
+const addReply = (req, res) => {
+  ProductReviewPost.find(req.params.id)
+  .then(comment => res.json(comment));
 };
 
 export { 
@@ -116,5 +122,6 @@ export {
   createPost,
   deletePost,
   editPost,
-  replyPost
+  replyPost,
+  addReply
 };
