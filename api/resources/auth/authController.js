@@ -1,4 +1,4 @@
-import User from '../user/userModels';
+import { User } from '../user/userModels';
 import jwt from 'jsonwebtoken';
 import {  
   JWT_SECRET,
@@ -20,15 +20,12 @@ const registerUser = (req, res) => {
   
   //check if username and password values are strings
   if(!missingField) {
-
     if(typeof req.body.username === 'string' &&
     typeof req.body.password === 'string'){
-      
       req.body.username = req.body.username.trim();
   
       User.find({ username: req.body.username })
       .then(user => {
-
         if(!user) {
 
           console.log(`The user '${user.username} has already been taken.`);

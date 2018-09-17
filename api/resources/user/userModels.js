@@ -7,6 +7,10 @@ const Schema = mongoose.Schema;
 
 //Tasks: 
 // -regular expression if a user wants to add images.
+//Created post date
+//Updated post date
+//Some type of general filter for more organization of different product review posts.
+//Link user to their posts, comments and replies
 
 //User Schema to hold username and password
 const userSchema = new Schema({
@@ -22,7 +26,10 @@ const userSchema = new Schema({
     minlength: 8,
     maxlength: 72,
     trim: true 
-  }
+  },
+  posts: [String],
+  comments: [String],
+  replies: [String]
 });
 
 //Reply Schema to hold replies

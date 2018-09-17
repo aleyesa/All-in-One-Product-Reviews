@@ -1,6 +1,6 @@
-import User from '../user/userModels';
+import { User } from '../user/userModels';
 import LocalStrategy  from 'passport-local';
-import  JwtStrategy from 'passport-jwt';
+import JwtStrategy from 'passport-jwt';
 import { JWT_SECRET } from '../../../config/config';
 
 const { Strategy, ExtractJwt } = JwtStrategy;

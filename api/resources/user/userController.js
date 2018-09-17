@@ -30,6 +30,7 @@ const getUser = (req, res) => {
 };
 
 //Used for put request to update a users account info.
+//Task: ***If changing password must encrypt it.
 const updateUser = (req, res) => {
   //check if req body has unspecified keys
   User
@@ -51,7 +52,9 @@ const deleteUser = (req, res) => {
 };
 
 const getPost = (req, res) => {
-  res.json('getting a selected user posts');
+  ProductReviewPost
+  .findById(req.params.id)
+  .then(post => res.json(post));
  };
 
 const getPosts = (req, res) => {
@@ -69,11 +72,15 @@ const createPost = (req, res) => {
 };
 
 const deletePost = (req, res) => {
-  res.json('delete post response works');
+  ProductReviewPost
+  .findByIdAndRemove(req.params.id)
+  .then(post => res.json(`${post.title} has been deleted.`));
 };
 
 const editPost = (req, res) => {
-  res.json('edit post response works');
+  ProductReviewPost
+  .findByIdAndUpdate(req.params.id, req.body)
+  .then(post => res.json(`${post.title} post has been updated`));
 };
 
 const addComment = (req, res) => {
