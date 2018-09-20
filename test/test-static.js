@@ -1,22 +1,21 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import {
-  app,
-  runServer,
-  closeServer
-} from '../server';
-
-const expect = chai.expect;
+import app from '../server';
 
 chai.use(chaiHttp);
 
+const connection = chai.request(app);
+const expect = chai.expect;
+
+
+
 describe('All In One Product Review Application', () => {
   before(() => {
-    return runServer();
+    connection.keepOpen();
   });
 
   after(() => {
-    return closeServer();
+    connection.close(console.log('Test completed, connection closed.'));
   });
 
   it('should get status 200 when loading root url', () => {
