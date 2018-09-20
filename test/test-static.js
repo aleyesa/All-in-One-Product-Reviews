@@ -7,8 +7,6 @@ chai.use(chaiHttp);
 const connection = chai.request(app.listen(8081));
 const expect = chai.expect;
 
-
-
 describe('All In One Product Review Application', () => {
   before(() => {
     connection.keepOpen();

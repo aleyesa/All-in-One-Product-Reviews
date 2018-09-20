@@ -3,10 +3,8 @@ import chaiHttp from 'chai-http';
 import mongoose from 'mongoose';
 
 import { 
-  app,
-  runServer,
-  closeServer
-} from '../server';
+  app
+} from '../lib/server';
 
 const expect = chai.expect;
 
