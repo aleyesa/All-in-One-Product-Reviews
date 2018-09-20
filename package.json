@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register",
-    "start": "nodemon server --exec babel-node"
+    "start": "nodemon ./lib/server --exec babel-node",
+    "build": "babel lib -d dist",
+    "serve": "node ./dist/server"
   },
   "author": "Aaron Leyesa",
   "license": "ISC",
