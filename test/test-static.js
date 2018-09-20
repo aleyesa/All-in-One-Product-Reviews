@@ -1,10 +1,10 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../server';
+import app from '../lib/server';
 
 chai.use(chaiHttp);
 
-const connection = chai.request(app);
+const connection = chai.request(app.listen(8081));
 const expect = chai.expect;
 
 
