@@ -1,4 +1,7 @@
 import express from 'express';
+import {
+  jwtAuthenticate
+} from '../../../middleware/passportMiddleware';
 
 import { 
   getAllUsers,
@@ -21,22 +24,19 @@ const userRouter = express.Router();
 userRouter.get('/user', getAllUsers);
 
 //main route for requests in regards to users by id
-userRouter.route('/user/:id')
-.get(getUser)
-.put(updateUser)
-.delete(deleteUser);
+userRouter.get('/user/:id', getUser);
+userRouter.put('/user/:id', jwtAuthenticate, updateUser);
+userRouter.delete('/user/:id', jwtAuthenticate, deleteUser);
 
 //show PRPost
-userRouter.route('/post')
-.get(getPosts)
-.post(createPost);
+userRouter.get('/post', getPosts);
+userRouter.post('/post', jwtAuthenticate, createPost);
 
-userRouter.route('/post/:id')
-.get(getPost)
-.post(addComment)
-.put(editPost)
-.delete(deletePost);
+userRouter.get('/post/:id', getPost)
+userRouter.post('/post/:id', jwtAuthenticate, addComment);
+userRouter.put('/post/:id', jwtAuthenticate, editPost);
+userRouter.delete('/post/:id', jwtAuthenticate, deletePost);
 
-userRouter.put('/reply/:id', addReply);
+userRouter.put('/reply/:id', jwtAuthenticate, addReply);
 
 export default userRouter;

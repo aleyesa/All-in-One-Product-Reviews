@@ -12,6 +12,7 @@ chai.use(chaiHttp);
 
 describe('All In One Product Review Application', () => {
   before(() => {
+    //start mongoose connections
     return runServer();
   });
 

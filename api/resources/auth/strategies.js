@@ -31,7 +31,7 @@ const jwtStrategy = new Strategy({
 }
 );
 
-export default (passport) => { 
-  passport.use(jwtStrategy);
-  passport.use(localStrategy);
+export { 
+  localStrategy,
+  jwtStrategy
 };

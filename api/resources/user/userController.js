@@ -64,11 +64,17 @@ const getPosts = (req, res) => {
  };
 
 const createPost = (req, res) => {
-  ProductReviewPost
-  .create(req.body)
-  .then(post => {
-    res.json(post);
-  });
+  User
+    .findOne(req.user)
+    .then(user => { 
+      req.body.user = user._id;
+
+      ProductReviewPost
+        .create(req.body)
+        .then(post => {
+          res.json(post);
+      });
+    });
 };
 
 const deletePost = (req, res) => {
