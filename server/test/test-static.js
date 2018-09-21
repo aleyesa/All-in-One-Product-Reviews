@@ -1,22 +1,19 @@
-const express = require('express');
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-
-const { app, runServer, closeServer } = require('../server');
-
-const expect = chai.expect;
-
-let server;
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../lib/server';
 
 chai.use(chaiHttp);
 
+const connection = chai.request(app.listen(8081));
+const expect = chai.expect;
+
 describe('All In One Product Review Application', () => {
   before(() => {
-    return runServer();
+    connection.keepOpen();
   });
 
   after(() => {
-    return closeServer();
+    connection.close(console.log('Test completed, connection closed.'));
   });
 
   it('should get status 200 when loading root url', () => {

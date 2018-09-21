@@ -1,12 +1,41 @@
-<!DOCTYPE html>
+<!DOCTYPE <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Node Capstone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
 </head>
 <body>
-  <p>Hello world!</p>
+  <header>
+    <h1>Welcome to my node capstone!</h1>
+    <h2>This application does...</h2>
+    <p>To get started, create an account with us!</p>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/api/user">Home</a></li>
+      <li><a href="#">About us</a></li>
+      <li><a href="/profile">Profile</a></li>
+    </ul>
+    <form class="login">
+      <fieldset>
+        <label for="user">Username:</label>
+        <input type="text" name="user" id="user"/>
+        <label for="password">Password:</label>
+        <input type="text" name="password" id="password"/>
+        <input type="submit" value="Create">
+      </fieldset>
+    </form>
+    <section class="test">
+      <p></p>
+    </section>
+  </nav>
+  <script src="index.js"></script>
 </body>
 </html>
