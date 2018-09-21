@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 import { 
   app
-} from '../lib/server';
+} from '../dev/server';
 
 const expect = chai.expect;
 
