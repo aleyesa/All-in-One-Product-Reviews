@@ -1,17 +1,28 @@
-// import chai from 'chai';
-// import chaiHttp from 'chai-http';
-// import mongoose from 'mongoose';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../dev/server';
 
-// import { 
-//   app
-// } from '../dev/server';
+chai.use(chaiHttp);
 
-// const expect = chai.expect;
+const connection = chai.request(app.listen(8081));
+const expect = chai.expect;
 
-// describe('User Authorization methods', () => {
+describe('All In One Product Review Application', () => {
+  before(() => {
+    connection.keepOpen();
+  });
 
-//   describe('User logging in', () => {
-//   })
+  after(() => {
+    connection.close(console.log('Test completed, connection closed.'));
+  });
 
-// });
+  it('should get status 200 when loading root url', () => {
+    return chai.request(app)
+      .get('/')
+      .then((res) => {
+        expect(res).to.have.status(200);
+      });
+  });
+});
+
 
