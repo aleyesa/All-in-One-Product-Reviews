@@ -55,17 +55,28 @@ const replySchema = new Schema({
     type: Schema.Types.ObjectId,
     default: new mongoose.Types.ObjectId
   },
-  reply: String
+  reply: String,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 //Comment Schema to hold a main comment followed by a set of replies
 const commentSchema = new Schema({
-  _id: Schema.Types.ObjectId,
+  _id: {
+    type: Schema.Types.ObjectId,
+    default: new mongoose.Types.ObjectId
+  },
   comment: String,
   replies: [{
     type: Schema.Types.ObjectId,
     ref: 'Reply'
-  }]
+  }],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 //Product Review Post Schema to hold the 
@@ -97,7 +108,10 @@ const productReviewPostSchema = new Schema({
     ref: 'User'
   },
   date: Date,
-  comments: [commentSchema]
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
 });
 
 //functions to help validate and secure passwords.

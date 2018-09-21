@@ -60,23 +60,29 @@ const getPost = (req, res) => {
 const getPosts = (req, res) => {
   ProductReviewPost
   .find()
+  .populate('user')
+  .populate('comments')
+  .populate('replies')
   .then(posts => res.json(posts));
  };
 
-const createPost = (req, res) => {
-  User
-    .findOne(req.user)
-    .then(user => { 
-      req.body.user = user._id;
+ const findUser = (req) => User.findOne(req.user);
 
-      ProductReviewPost
-        .create(req.body)
-        .then(post => {
-          res.json(post);
-      });
+ //Task: when creating post we link the user id.
+const createPost = (req, res) => {
+  findUser(req)
+  .then(user => { 
+    req.body.user = user._id;
+
+    ProductReviewPost
+      .create(req.body)
+      .then(post => {
+        res.json(post);
     });
+  });
 };
 
+//TASK: Remove post id from user?
 const deletePost = (req, res) => {
   ProductReviewPost
   .findByIdAndRemove(req.params.id)
@@ -90,31 +96,42 @@ const editPost = (req, res) => {
 };
 
 const addComment = (req, res) => {
-  Comment
-  .create( { comment: req.body.comment } )
-  .then(comment => {
-    ProductReviewPost
-    .findById(req.params.id)
-    .then(post => {
-      post.comments.push(comment);
-      ProductReviewPost.findByIdAndUpdate(req.params.id, { comments: post.comments } )
-      .then(post => res.json(post));
-    })
-  });
+  findUser(req)
+  .then(user => {
+    req.body.user = user._id;
+
+    Comment
+    .create(req.body)
+    .then(comment => {
+      ProductReviewPost
+      .findByIdAndUpdate(req.params.id)
+      .then(post => {
+        post.comments.push(comment);
+        ProductReviewPost
+        .findByIdAndUpdate(req.params.id, {comments: post.comments})
+        .then(res.json(post));
+      })  
+    });
+    });
 };
 
 //create new comment document then update the post document?
 const addReply = (req, res) => {
-  Reply
-  .create( { reply: req.body.reply } )
-  .then(reply => {
-    Comment.findById(req.params.id)
-    .then(comment => {
-      comment.replies.push(reply);
-      Comment.findByIdAndUpdate(req.params.id, { replies: comment.replies } )
-      .then(res.json(comment));
+  findUser(req)
+  .then(user => {
+    req.body.user = user._id;
+
+    Reply
+    .create(req.body)
+    .then(reply => {
+      Comment.findById(req.params.id)
+      .then(comment => {
+        comment.replies.push(reply);
+        Comment.findByIdAndUpdate(req.params.id, { replies: comment.replies } )
+        .then(res.json(comment));
+      });
     });
-  })
+  });
 };
 
 export { 

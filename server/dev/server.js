@@ -1,7 +1,7 @@
 import express from 'express';
-import appMiddleware from '../middleware/appMiddleware';
-import api from '../api/api';
-import { TEST_DATABASE } from '../config/config';
+import appMiddleware from './middleware/appMiddleware';
+import api from './api/api';
+import { TEST_DATABASE } from './config/config';
 import mongoose from 'mongoose';
 
 const app = express();
