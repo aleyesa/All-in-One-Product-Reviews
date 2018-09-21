@@ -4,8 +4,8 @@
   "description": "Product Review Application",
   "main": "server.js",
   "scripts": {
-    "test": "mocha ./server/test --compilers js:babel-core/register",
     "start": "nodemon ./server/dev/server --exec babel-node",
+    "test": "mocha ./server/test --compilers js:babel-core/register",
     "clean:dist": "rd /s /q dist",
     "build": "babel server/dev -d dist",
     "serve": "node ./dist/server",
