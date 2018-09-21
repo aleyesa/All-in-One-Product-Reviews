@@ -13,13 +13,13 @@ const app = express();
 app.use(express.static('public'));
 
 //Connect to test database
-mongoose.connect(PRODUCTION_DATABASE, { useNewUrlParser: true }, (err) => {
-  if(err) {
-  console.log(err);
-  } else {
-    console.log('database has been connected.');
-  }
-});
+// mongoose.connect(PRODUCTION_DATABASE, { useNewUrlParser: true }, (err) => {
+//   if(err) {
+//   console.log(err);
+//   } else {
+//     console.log('database has been connected.');
+//   }
+// });
 
 //load and use middlewares
 appMiddleware(app, express);

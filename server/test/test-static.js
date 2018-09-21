@@ -9,11 +9,11 @@ const expect = chai.expect;
 
 describe('All In One Product Review Application', () => {
   before(() => {
-    connection.keepOpen();
+    return connection.keepOpen();
   });
 
   after(() => {
-    connection.close(console.log('Test completed, connection closed.'));
+    return connection.close(console.log('Test completed, connection closed.'));
   });
 
   it('should get status 200 when loading root url', () => {
