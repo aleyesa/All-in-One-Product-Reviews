@@ -7,9 +7,9 @@
     "test": "mocha ./server/test --compilers js:babel-core/register",
     "start": "nodemon ./server/dev/server --exec babel-node",
     "clean:dist": "rd /s /q dist",
-    "build:dist": "babel server/dev -d dist",
+    "build": "babel server/dev -d dist",
     "serve": "node ./dist/server",
-    "serve:dist": "npm run build:dist && npm run serve"
+    "serve:dist": "npm run build && npm run serve"
   },
   "author": "Aaron Leyesa",
   "license": "ISC",
