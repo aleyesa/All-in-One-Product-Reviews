@@ -4,7 +4,7 @@ import app from '../dev/server';
 
 chai.use(chaiHttp);
 
-const connection = chai.request(app.listen(8081));
+const connection = chai.request(app.listen(8082));
 const expect = chai.expect;
 
 describe('All In One Product Review Application', () => {
