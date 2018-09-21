@@ -30,7 +30,7 @@ var app = (0, _express2.default)();
 app.use(_express2.default.static('public'));
 
 //Connect to test database
-_mongoose2.default.connect(_config.TEST_DATABASE, { useNewUrlParser: true }, function (err) {
+_mongoose2.default.connect(_config.PRODUCTION_DATABASE, { useNewUrlParser: true }, function (err) {
   if (err) {
     console.log(err);
   } else {

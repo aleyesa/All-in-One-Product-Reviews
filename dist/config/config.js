@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.JWT_EXPIRY = exports.JWT_SECRET = exports.TEST_DATABASE = undefined;
+exports.JWT_EXPIRY = exports.JWT_SECRET = exports.TEST_DATABASE = exports.PRODUCTION_DATABASE = undefined;
 
 var _dotenv = require('dotenv');
 
@@ -13,6 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _dotenv2.default.config();
 
+var PRODUCTION_DATABASE = 'mongodb://owner:productreview1@ds111063.mlab.com:11063/productreviewdb';
 var TEST_DATABASE = 'mongodb://localhost/api-user-test';
 // exports.DATABASE_URL =
 //     process.env.DATABASE_URL ||
@@ -21,6 +22,7 @@ var TEST_DATABASE = 'mongodb://localhost/api-user-test';
 // exports.PORT = process.env.PORT || 8080;
 var JWT_SECRET = process.env.JWT_SECRET;
 var JWT_EXPIRY = process.env.JWT_EXPIRY || '7d';
+exports.PRODUCTION_DATABASE = PRODUCTION_DATABASE;
 exports.TEST_DATABASE = TEST_DATABASE;
 exports.JWT_SECRET = JWT_SECRET;
 exports.JWT_EXPIRY = JWT_EXPIRY;
