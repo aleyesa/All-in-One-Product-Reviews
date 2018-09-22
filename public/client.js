@@ -4,6 +4,7 @@ $('.login').on('submit', (event) => {
   const password = $('#password').val();
   console.log(username);
   console.log(password);
+
   $.ajax({
     contentType: 'application/json',
     type: 'POST',
@@ -18,4 +19,6 @@ $('.login').on('submit', (event) => {
       $('.test p').text('user created');
     }
   });
+  //also set jwt into local storage/ when a user logs in
 });
+
