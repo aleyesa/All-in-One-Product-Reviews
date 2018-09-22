@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-const PRODUCTION_DATABASE = 'mongodb://owner:productreview1@ds111063.mlab.com:11063/productreviewdb';
+const PRODUCTION_DATABASE = process.env.PRODUCTION_DATABASE;
 const TEST_DATABASE = 'mongodb://localhost/api-user-test';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'password';
