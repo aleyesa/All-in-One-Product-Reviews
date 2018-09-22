@@ -24,7 +24,7 @@ if (require.main === module) {
       if (err) {
         return console.log(err);
       }
-      server = app.listen(process.env.PORT || 8080, (port = PORT) => {
+      server = app.listen(PORT, (port = PORT) => {
         console.log(`Your app is listening on port ${port}`);
       })
         .on('error', err => {

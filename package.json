@@ -4,10 +4,10 @@
   "description": "Product Review Application",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon ./server/dev/server --exec babel-node",
+    "start": "node dist/server",
     "test": "mocha ./server/test --compilers js:@babel/register",
     "build": "babel server/dev -d dist",
-    "serve": "node dist/server",
+    "serve": "nodemon ./server/dev/server --exec babel-node",
     "serve:dist": "npm run build && npm run serve"
   },
   "author": "Aaron Leyesa",

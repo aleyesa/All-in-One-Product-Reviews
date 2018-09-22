@@ -34,7 +34,7 @@ if (require.main === module) {
       return console.log(err);
     }
 
-    server = app.listen(process.env.PORT || 8080, function () {
+    server = app.listen(_config.PORT, function () {
       var port = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _config.PORT;
       console.log("Your app is listening on port ".concat(port));
     }).on('error', function (err) {
