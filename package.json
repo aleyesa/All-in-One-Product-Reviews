@@ -5,18 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon ./server/dev/server --exec babel-node",
-    "test": "mocha ./server/test --compilers js:babel-core/register",
-    "clean:dist": "rd /s /q dist",
+    "test": "mocha ./server/test --compilers js:@babel/register",
     "build": "babel server/dev -d dist",
-    "serve": "node ./dist/server",
+    "serve": "node dist/server",
     "serve:dist": "npm run build && npm run serve"
   },
   "author": "Aaron Leyesa",
   "license": "ISC",
   "dependencies": {
-    "babel-core": "^6.26.3",
-    "babel-env": "^2.4.1",
-    "babel-preset-stage-0": "^6.24.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
@@ -28,6 +24,11 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
     "chai": "^4.1.2",
     "chai-http": "^4.2.0",
     "faker": "^4.1.0",

@@ -1,23 +1,28 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.jwtAuthenticate = exports.localAuthenticate = undefined;
+exports.jwtAuthenticate = exports.localAuthenticate = void 0;
 
-var _passport = require('passport');
+var _passport = _interopRequireDefault(require("passport"));
 
-var _passport2 = _interopRequireDefault(_passport);
-
-var _strategies = require('../api/resources/auth/strategies');
+var _strategies = require("../api/resources/auth/strategies");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_passport2.default.use(_strategies.jwtStrategy);
-_passport2.default.use(_strategies.localStrategy);
+_passport.default.use(_strategies.jwtStrategy);
 
-var localAuthenticate = _passport2.default.authenticate('local', { session: false });
-var jwtAuthenticate = _passport2.default.authenticate('jwt', { session: false });
+_passport.default.use(_strategies.localStrategy);
+
+var localAuthenticate = _passport.default.authenticate('local', {
+  session: false
+});
 
 exports.localAuthenticate = localAuthenticate;
+
+var jwtAuthenticate = _passport.default.authenticate('jwt', {
+  session: false
+});
+
 exports.jwtAuthenticate = jwtAuthenticate;

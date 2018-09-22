@@ -1,46 +1,49 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var _express = require('express');
+var _express = _interopRequireDefault(require("express"));
 
-var _express2 = _interopRequireDefault(_express);
+var _appMiddleware = _interopRequireDefault(require("./middleware/appMiddleware"));
 
-var _appMiddleware = require('./middleware/appMiddleware');
+var _api = _interopRequireDefault(require("./api/api"));
 
-var _appMiddleware2 = _interopRequireDefault(_appMiddleware);
+var _config = require("./config/config");
 
-var _api = require('./api/api');
-
-var _api2 = _interopRequireDefault(_api);
-
-var _config = require('./config/config');
-
-var _mongoose = require('mongoose');
-
-var _mongoose2 = _interopRequireDefault(_mongoose);
+var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express2.default)();
+var app = (0, _express.default)();
+var server; //Use static assets
 
-//Use static assets
-app.use(_express2.default.static('public'));
+app.use(_express.default.static('public')); //load and use middlewares
 
-//Connect to test database
-_mongoose2.default.connect(_config.PRODUCTION_DATABASE, { useNewUrlParser: true }, function (err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('database has been connected.');
-  }
-});
+(0, _appMiddleware.default)(app, _express.default); //use express application and connect
 
-//load and use middlewares
-(0, _appMiddleware2.default)(app, _express2.default);
-//use express application and connect
-(0, _api2.default)(app);
+(0, _api.default)(app);
 
-exports.default = app;
+if (require.main === module) {
+  _mongoose.default.connect(_config.PRODUCTION_DATABASE, function (err) {
+    console.log('db connected.');
+
+    if (err) {
+      return console.log(err);
+    }
+
+    server = app.listen(process.env.PORT || 8080, function () {
+      var port = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _config.PORT;
+      console.log("Your app is listening on port ".concat(port));
+    }).on('error', function (err) {
+      _mongoose.default.disconnect();
+
+      console.log(err);
+    });
+  });
+}
+
+var _default = app;
+exports.default = _default;
