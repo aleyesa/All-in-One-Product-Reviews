@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node dist/server",
-    "test": "mocha ./server/test --compilers js:@babel/register",
+    "test": "mocha ./server/test --require @babel/register",
     "build": "babel server/dev -d dist",
     "serve": "nodemon ./server/dev/server --exec babel-node",
     "serve:dist": "npm run build && npm run serve"
@@ -31,6 +31,7 @@
     "@babel/register": "^7.0.0",
     "chai": "^4.1.2",
     "chai-http": "^4.2.0",
+    "coffeescript": "^2.3.2",
     "faker": "^4.1.0",
     "mocha": "^5.2.0"
   }
