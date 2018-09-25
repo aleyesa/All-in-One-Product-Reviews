@@ -24,6 +24,7 @@ authRouter.post('/auth/login', _passportMiddleware.localAuthenticate, _authContr
 // You use the same JWT to make as many requests as you like until it expires.
 
 authRouter.get('/protected', _passportMiddleware.jwtAuthenticate, function (req, res) {
+  console.log(req.user);
   return res.json(req.user);
 }); // POST /api/auth/refresh to request a new JWT with a laster expiry date. A valid, non-expired JWT is required.
 

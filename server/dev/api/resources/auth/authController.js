@@ -5,9 +5,9 @@ import {
   JWT_EXPIRY
 } from '../../../config/config';
 
-const createAuthToken = (user) => {
-  return jwt.sign({user}, JWT_SECRET, {
-    subject: user.username,
+const createAuthToken = (username) => {
+  return jwt.sign({username}, JWT_SECRET, {
+    subject: username,
     expiresIn: JWT_EXPIRY,
     algorithm: 'HS256'
   });
@@ -69,14 +69,15 @@ const registerUser = (req, res) => {
 
 //request a JWT/ A valid username and password are required, and a new token is given in exchange.
 const validateLogin = (req, res) => {
-  const authToken = createAuthToken({username: req.body.username});
-  res.status(202).json({authToken});
+  console.log(req.body.username);
+  const authToken = createAuthToken(req.body.username);
+  res.status(200).json({authToken});
 };
 
 //request a new JWT with a laster expiry date. A valid, non-expired JWT is required.
 const newJWT = (req, res) => {
   const authToken = createAuthToken(req.user);
-  res.status(202).json({authToken});
+  res.status(200).json({authToken});
 };
 
 export {

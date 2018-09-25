@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -17,17 +17,20 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express.default)();
-var server; //Use static assets
+//fix deprecation warning
+_mongoose.default.set('useCreateIndex', true);
 
-app.use(_express.default.static('public')); //load and use middlewares
+var app = (0, _express.default)();
+var server; //load and use middlewares
 
 (0, _appMiddleware.default)(app, _express.default); //use express application and connect
 
 (0, _api.default)(app);
 
 if (require.main === module) {
-  _mongoose.default.connect(_config.PRODUCTION_DATABASE, function (err) {
+  _mongoose.default.connect(_config.PRODUCTION_DATABASE || _config.TEST_DATABASE, {
+    useNewUrlParser: true
+  }, function (err) {
     console.log('db connected.');
 
     if (err) {

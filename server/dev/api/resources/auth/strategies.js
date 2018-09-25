@@ -6,7 +6,7 @@ import { JWT_SECRET } from '../../../config/config';
 const { Strategy, ExtractJwt } = JwtStrategy;
 
 const localStrategy = new LocalStrategy.Strategy((username, password, callbackfn) => {
-  User.findOne( { username: username } )
+  User.findOne( { username } )
   .then(user => {
     user.comparePw(password, user.password)
     .then(user => {
@@ -27,7 +27,8 @@ const jwtStrategy = new Strategy({
   algorithms: ['HS256']
 },
 (payload, done) => {
-  done(null, payload.user);
+  console.log(payload);
+  done(null, payload);
 }
 );
 

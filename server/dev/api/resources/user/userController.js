@@ -66,7 +66,7 @@ const getPosts = (req, res) => {
   .then(posts => res.json(posts));
  };
 
- const findUser = (req) => User.findOne(req.user);
+ const findUser = (req) => User.findOne(req.username);
 
  //Task: when creating post we link the user id.
 const createPost = (req, res) => {

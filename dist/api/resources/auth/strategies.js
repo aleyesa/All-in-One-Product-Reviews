@@ -38,6 +38,7 @@ var jwtStrategy = new Strategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
   algorithms: ['HS256']
 }, function (payload, done) {
-  done(null, payload.user);
+  console.log(payload);
+  done(null, payload);
 });
 exports.jwtStrategy = jwtStrategy;

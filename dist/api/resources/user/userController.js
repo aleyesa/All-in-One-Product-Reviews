@@ -74,7 +74,7 @@ var getPosts = function getPosts(req, res) {
 exports.getPosts = getPosts;
 
 var findUser = function findUser(req) {
-  return _userModels.User.findOne(req.user);
+  return _userModels.User.findOne(req.username);
 }; //Task: when creating post we link the user id.
 
 

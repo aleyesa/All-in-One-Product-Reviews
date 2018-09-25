@@ -4,7 +4,7 @@
   "description": "Product Review Application",
   "main": "server.js",
   "scripts": {
-    "start": "node dist/server",
+    "start": "npm run build && node dist/server",
     "test": "mocha ./server/test --require @babel/register",
     "build": "babel server/dev -d dist",
     "serve": "nodemon ./server/dev/server --exec babel-node",

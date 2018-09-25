@@ -13,11 +13,11 @@ var _config = require("../../../config/config");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var createAuthToken = function createAuthToken(user) {
+var createAuthToken = function createAuthToken(username) {
   return _jsonwebtoken.default.sign({
-    user: user
+    username: username
   }, _config.JWT_SECRET, {
-    subject: user.username,
+    subject: username,
     expiresIn: _config.JWT_EXPIRY,
     algorithm: 'HS256'
   });
@@ -71,10 +71,9 @@ var registerUser = function registerUser(req, res) {
 exports.registerUser = registerUser;
 
 var validateLogin = function validateLogin(req, res) {
-  var authToken = createAuthToken({
-    username: req.body.username
-  });
-  res.status(202).json({
+  console.log(req.body.username);
+  var authToken = createAuthToken(req.body.username);
+  res.status(200).json({
     authToken: authToken
   });
 }; //request a new JWT with a laster expiry date. A valid, non-expired JWT is required.
@@ -84,7 +83,7 @@ exports.validateLogin = validateLogin;
 
 var newJWT = function newJWT(req, res) {
   var authToken = createAuthToken(req.user);
-  res.status(202).json({
+  res.status(200).json({
     authToken: authToken
   });
 };
