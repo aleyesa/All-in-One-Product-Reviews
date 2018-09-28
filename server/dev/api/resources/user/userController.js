@@ -70,6 +70,7 @@ const getPosts = (req, res) => {
 
  //Task: when creating post we link the user id.
 const createPost = (req, res) => {
+  console.log('Testing create post: ' + req.user);
   findUser(req)
   .then(user => { 
     req.body.user = user._id;

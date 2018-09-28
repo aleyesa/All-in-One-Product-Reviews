@@ -13,7 +13,9 @@
 </head>
 <body>
   <header>
-    <h1>Login</h1>
+    <h1>Welcome to my node capstone!</h1>
+    <h2>This application does...</h2>
+    <p>To get started, create an account with us!</p>
   </header>
   <nav>
     <ul>
@@ -23,20 +25,13 @@
       <li><a href="login.html">Login</a></li>
       <li><a href="productReviews.html">Product Reviews</a></li>
     </ul>
-    <form class="login">
-      <fieldset>
-        <label for="user">Username:</label>
-        <input type="text" name="user" id="user"/>
-        <label for="password">Password:</label>
-        <input type="text" name="password" id="password"/>
-        <input type="submit" value="Login">
-      </fieldset>
-    </form>
-    <button class="testReq">Test protected request</button>
-    <section class="test">
-      <p></p>
-    </section>
   </nav>
+  <button class="getPostBtn">Get posts</button>
+  <section class="showPost">
+    <p></p>
+  </section>
   <script src="client.js"></script>
+  <script src="./api/postApi.js"></script>
+  <script src="./api/userApi.js"></script>
 </body>
 </html>

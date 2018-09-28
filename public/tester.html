@@ -1,0 +1,105 @@
+<!DOCTYPE <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Node Capstone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>All In One Product Reviews API Requests</h1>
+  </header>
+
+  <section class="userRequest">
+    <h2>User Requests:</h2>
+    <div class="createUser">
+      <h3>Create User</h3>
+      <form class="signup">
+        <fieldset>
+          <label for="user">Username:</label>
+          <input type="text" name="user" id="user"/>
+          <label for="password">Password:</label>
+          <input type="text" name="password" id="password"/>
+          <input type="submit" value="Create">
+        </fieldset>
+      </form>
+      <section class="test">
+        <p></p>
+      </section>
+    </div>
+
+    <div class="updateUserById">
+        <h3>Create User</h3>
+        <section class="test">
+          <p></p>
+        </section>
+      </div>
+
+      <div class="deleteUserById">
+        <h3>Delete User by Id</h3>
+      </div>
+
+      <div class="getUser">
+        <h3>Get All Users</h3>
+      </div>
+
+      <div class="getUserById">
+          <h3>Get User by Id</h3>
+      </div>
+  </section>
+
+  <section class="userAuthenticatedRequests">
+    <h2>User Authenticated Requests:</h2>
+      <div class="createJWT">
+          <h3>Create JWT when loggin in</h3>
+      </div>
+
+      <div class="getToProtectedEndpoint">
+          <h3>Get Protected API Endpoint</h3>
+      </div>
+
+      <div class="createNewJwtFromOld">
+          <h3>Create New JWT from Existing JWT</h3>
+      </div>
+  </section>
+
+  <section class="postRequests">
+    <h2>Post Requests:</h2>
+
+      <div class="createPost">
+          <h3>Create Post</h3>
+      </div>
+
+      <div class="getPosts">
+          <h3>Get all Posts</h3>
+      </div>
+
+      <div class="getPostById">
+          <h3>Get Post By Id</h3>
+      </div>
+
+      <div class="addComment">
+          <h3>Add Comment</h3>
+      </div>
+
+      <div class="addReply">
+          <h3>Add Reply</h3>
+      </div>
+      
+      <div class="editPostById">
+          <h3>Edit Post by Id</h3>
+      </div>
+
+      <div class="deletePostById">
+          <h3>Delete Post by Id</h3>
+      </div>
+  </section>
+  <script src="./api/ApiTester.js"></script>
+</body>
+</html>
