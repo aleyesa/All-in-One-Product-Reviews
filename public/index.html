@@ -12,32 +12,32 @@
     crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>
-    <h1>Welcome to my node capstone!</h1>
-    <h2>This application does...</h2>
-    <p>To get started, create an account with us!</p>
-  </header>
-  <nav>
+  <nav role="navigation" class="mainNav">
     <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="about_us.html">About us</a></li>
+      <li><a href="productReviews.html">Product Reviews</a></li>
       <li><a href="profile.html">Profile</a></li>
       <li><a href="login.html">Login</a></li>
-      <li><a href="productReviews.html">Product Reviews</a></li>
     </ul>
-    <form class="signup">
-      <fieldset>
-        <label for="user">Username:</label>
-        <input type="text" name="user" id="user"/>
-        <label for="password">Password:</label>
-        <input type="text" name="password" id="password"/>
-        <input type="submit" value="Create">
-      </fieldset>
-    </form>
-    <section class="test">
-      <p></p>
-    </section>
   </nav>
+  <header>
+    <h1>All in One Product Reviews</h1>
+    <h2>A straight to the point product review site</h2>
+  </header>
+  <form class="signup">
+    <fieldset>
+      <label for="user">Username:</label>
+      <input type="text" name="user" id="user"/>
+      <label for="password">Password:</label>
+      <input type="text" name="password" id="password"/>
+      <input type="submit" value="Create">
+    </fieldset>
+  </form>
+  <section class="test">
+    <p></p>
+  </section>
+
+  <h2>Find a product review here.</h2>
   <script src="client.js"></script>
   <script src="./api/postApi.js"></script>
   <script src="./api/userApi.js"></script>

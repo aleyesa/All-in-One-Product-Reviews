@@ -1,0 +1,13 @@
+.mainNav {
+  text-align: right;
+}
+
+header {
+  text-align: center;
+}
+
+ul li {
+display: inline-block;
+list-style-type: none;
+}
+
