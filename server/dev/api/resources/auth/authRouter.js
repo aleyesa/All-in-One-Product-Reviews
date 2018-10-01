@@ -23,7 +23,7 @@ authRouter.post('/auth/login',
 // A valid, non-expired JWT is required. 
 // You use the same JWT to make as many requests as you like until it expires.
 authRouter.get('/protected', jwtAuthenticate, (req, res) => {
-  console.log(req.user);
+  console.log(req.user.username);
    return res.json(req.user);
 });
 

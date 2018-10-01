@@ -15,6 +15,7 @@ const Schema = mongoose.Schema;
 //add email with regex
 //notification
 //validate through front end and back end
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 //User Schema to hold username and password
 const userSchema = new Schema({
@@ -26,7 +27,13 @@ const userSchema = new Schema({
     type: String,
     required: 'Username is required.',
     minlength: 1,
-    unique: true
+    unique: true,
+    validate: {
+      validator: (username) => {
+       return emailRegex.test(username);
+      },
+      message: username => `${username.value} is not a valid username.`
+    }
   },
   password: { 
     type: String, 

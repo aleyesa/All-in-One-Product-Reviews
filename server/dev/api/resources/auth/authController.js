@@ -59,10 +59,12 @@ const registerUser = (req, res) => {
 
     }else {
       console.log('username or password is not a string value.');
+      res.status(400).json('username or password is not a string value.');
     }
 
   }else {
     console.log(`${missingField} field is missing.`);
+    res.status(400).json(`${missingField} field is missing.`);
   }
 
 };
@@ -76,7 +78,7 @@ const validateLogin = (req, res) => {
 
 //request a new JWT with a laster expiry date. A valid, non-expired JWT is required.
 const newJWT = (req, res) => {
-  const authToken = createAuthToken(req.user);
+  const authToken = createAuthToken(req.user.username);
   res.status(200).json({authToken});
 };
 

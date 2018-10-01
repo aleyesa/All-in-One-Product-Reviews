@@ -10,10 +10,10 @@ import {
 const getAllUsers = (req, res) => {
   //need check for required keys first
   User
-    .find()
-    .select(['-__v'])
-    .then(user => res.json(user))
-    .catch(err => res.status(400).log(err.message));
+  .find()
+  .select(['-__v'])
+  .then(user => res.json(user))
+  .catch(err => res.status(400).log(err.message));
 };
 
 //used for another get request to get a specific user by id.
@@ -54,7 +54,11 @@ const deleteUser = (req, res) => {
 const getPost = (req, res) => {
   ProductReviewPost
   .findById(req.params.id)
-  .then(post => res.json(post));
+  .then(post => res.json(post))
+  .catch(error => {
+    console.log(error.message);
+    response.status(400).json('No posts found.');
+  });
  };
 
 const getPosts = (req, res) => {
@@ -63,12 +67,16 @@ const getPosts = (req, res) => {
   .populate('user')
   .populate('comments')
   .populate('replies')
-  .then(posts => res.json(posts));
+  .then(posts => res.json(posts))
+  .catch((error) => {
+    console.log(error.message);
+    res.status(400).json('No posts found.');
+  });
  };
 
- const findUser = (req) => User.findOne(req.username);
+const findUser = (req) => User.findOne(req.username);
 
- //Task: when creating post we link the user id.
+//Task: when creating post we link the user id.
 const createPost = (req, res) => {
   console.log('Testing create post: ' + req.user);
   findUser(req)
@@ -80,6 +88,10 @@ const createPost = (req, res) => {
       .then(post => {
         res.json(post);
     });
+  })
+  .catch((error) => {
+    console.log(error.message);
+    res.status(400).json('Could not create post do to missing fields.');
   });
 };
 
@@ -87,13 +99,21 @@ const createPost = (req, res) => {
 const deletePost = (req, res) => {
   ProductReviewPost
   .findByIdAndRemove(req.params.id)
-  .then(post => res.json(`${post.title} has been deleted.`));
+  .then(post => res.json(`${post.title} has been deleted.`))
+  .catch((error) => {
+    console.log(error.message);
+    res.status(400).json('Post could not be deleted.');
+  });
 };
 
 const editPost = (req, res) => {
   ProductReviewPost
   .findByIdAndUpdate(req.params.id, req.body)
-  .then(post => res.json(`${post.title} post has been updated`));
+  .then(post => res.json(`${post.title} post has been updated`))
+  .catch((error) => {
+    console.log(error.message);
+    res.status(400).json('Unable to save updates on post.');
+  });
 };
 
 const addComment = (req, res) => {
@@ -113,7 +133,11 @@ const addComment = (req, res) => {
         .then(res.json(post));
       })  
     });
-    });
+  })
+  .catch((error) => {
+    console.log(error.message);
+    res.status(400).json('Adding comment to post unexpectedly failed.');
+  });
 };
 
 //create new comment document then update the post document?
@@ -132,6 +156,10 @@ const addReply = (req, res) => {
         .then(res.json(comment));
       });
     });
+  })
+  .catch((error) => {
+    console.log(error.message);
+    res.status(400).json('Error adding a reply.')
   });
 };
 
