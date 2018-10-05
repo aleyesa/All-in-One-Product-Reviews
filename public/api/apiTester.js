@@ -74,6 +74,7 @@ const deleteUserById = () => {
 
 //Get Users
 const getUser = () => {
+  let userList = '';
   $('.getUser').on('click', '.getUsersBtn', () => {
     $.ajax({
       contentType: 'application/json',
@@ -81,8 +82,13 @@ const getUser = () => {
       url: `api/user`,
       dataType: 'json',
       success: function (response) {
-        console.log(response.length)
-        $('.getUser .test').text(response[0].username);
+        console.log(response)
+        for(let i = 0; i < response.length; i++){
+         userList += `<li>${response[i].username}</li>`;
+        }
+
+        $('.getUser .test')
+        .html(`<ul>${userList}</ul>`);
       }    
     });
   });
