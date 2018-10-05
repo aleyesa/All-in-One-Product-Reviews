@@ -122,6 +122,7 @@ const login = () => {
       success: function (response) {
         sessionStorage.setItem('currJWT', response.authToken);
         currJWT = sessionStorage.getItem('currJWT');
+
         $('.createJWT .test').text(currJWT);
       }    
     });
@@ -141,6 +142,8 @@ const testProtected = () => {
       },
       success: function (response) {
         $('.getToProtectedEndpoint .test').text(response.username);
+        sessionStorage.setItem('currUser', response.username);
+        currUser = sessionStorage.getItem('currUser');
       }
     });
   });
