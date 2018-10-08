@@ -71,8 +71,10 @@ const registerUser = (req, res) => {
 };
 
 const getUserId = (req, res) => {
+  console.log(req.user.username);
   findUser(req.user.username)
-  .then(user => res.json(
+  .then(user => 
+    res.json(
     {
       username: user.username,
       userId: user._id

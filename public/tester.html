@@ -97,6 +97,14 @@
           </section>
       </div>
 
+      <div class="logout">
+          <h3>Logout</h3>
+          <button class="logoutBtn">Logout</button>
+          <section class="test">
+            <p></p>
+          </section>
+      </div>
+
       <div class="getToProtectedEndpoint">
           <h3>Get Protected API Endpoint</h3>
           <button class="protectedEnd">Get Protected Endpoint</button>
@@ -143,16 +151,17 @@
           <h3>Get all Posts</h3>
           <button class="getPostBtn">Get Posts</button>
           <section class="test">
-            <p></p>
+            <ul>
+            </ul>
           </section>
-      </div>
 
-      <div class="getPostById">
-          <h3>Get Post By Id</h3>
-          <button class="getPostByIdBtn">Get Posts</button>
-          <section class="test">
-            <p></p>
-          </section>
+          <div id="clickedPost">
+              <h3>show the clicked post</h3>
+              <section class="test">
+                <p></p>
+              </section>
+          </div>
+
       </div>
 
       <div class="addComment">
@@ -167,51 +176,54 @@
           <section class="test">
             <p></p>
           </section>
-      </div>
 
-      <div class="addReply">
-          <h3>Add Reply</h3>
-          <form class="addReplyForm">
-            <fieldset>
-              <label for="reply">Comment:</label>
-              <input type="text" name="reply" id="reply"/>
-              <input type="submit" value="Add Reply">
-            </fieldset>
-          </form>
-          <section class="test">
-            <p></p>
-          </section>
+          <div class="addReply">
+              <h3>Add Reply</h3>
+              <form class="addReplyForm">
+                <fieldset>
+                  <label for="reply">Comment:</label>
+                  <input type="text" name="reply" id="reply"/>
+                  <input type="submit" value="Add Reply">
+                </fieldset>
+              </form>
+              <section class="test">
+                <p></p>
+              </section>
+          </div>
       </div>
       
-      <div class="editPostById">
-          <h3>Edit Post by Id</h3>
-          <form class="editPost">
-            <fieldset>
-              <label for="title">Title:</label>
-              <input type="text" name="title" id="title"/>
-              <label for="images">Images:</label>
-              <input type="text" name="images" id="images"/>
-              <label for="theGood">The Good:</label>
-              <input type="text" name="theGood" id="theGood">
-              <label for="theBad">The Bad:</label>
-              <input type="text" name="theBad" id="theBad"> 
-              <label for="rating">Rating:</label>
-              <input type="text" name="rating" id="rating">
-              <input type="submit" value="Update Post">
-            </fieldset>
-          </form>
-          <section class="test">
-            <p></p>
-          </section>
-      </div>
+      <div class="profile">
+        <h2>Profile</h2>
+        <div class="editPostById">
+            <h3>Edit Post by Id</h3>
+            <form class="editPost">
+              <fieldset>
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title"/>
+                <label for="images">Images:</label>
+                <input type="text" name="images" id="images"/>
+                <label for="theGood">The Good:</label>
+                <input type="text" name="theGood" id="theGood">
+                <label for="theBad">The Bad:</label>
+                <input type="text" name="theBad" id="theBad"> 
+                <label for="rating">Rating:</label>
+                <input type="text" name="rating" id="rating">
+                <input type="submit" value="Update Post">
+              </fieldset>
+            </form>
+            <section class="test">
+              <p></p>
+            </section>
+        </div>
 
-      <div class="deletePostById">
-          <h3>Delete Post by Id</h3>
-          <button class="deletePostBtn">Delete Post</button>
-          <section class="test">
-            <p></p>
-          </section>
-      </div>
+        <div class="deletePostById">
+            <h3>Delete Post by Id</h3>
+            <button class="deletePostBtn">Delete Post</button>
+            <section class="test">
+              <p></p>
+            </section>
+        </div>
+    </div>
   </section>
   <script src="./api/ApiTester.js"></script>
 </body>

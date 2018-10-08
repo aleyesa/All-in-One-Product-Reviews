@@ -19,10 +19,10 @@ const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+")
 
 //User Schema to hold username and password
 const userSchema = new Schema({
-  _id: {
-    type: Schema.Types.ObjectId,
-    default: new mongoose.Types.ObjectId
-  },
+  // _id: {
+  //   type: Schema.Types.ObjectId,
+  //   default: new mongoose.Types.ObjectId
+  // },
   firstName: String,
   lastName: String,
   username: { 
@@ -32,6 +32,7 @@ const userSchema = new Schema({
     unique: true,
     validate: {
       validator: (username) => {
+        console.log(emailRegex.test(username));
        return emailRegex.test(username);
       },
       message: username => `${username.value} is not a valid username.`
@@ -60,10 +61,10 @@ const userSchema = new Schema({
 
 //Reply Schema to hold replies
 const replySchema = new Schema({
-  _id: {
-    type: Schema.Types.ObjectId,
-    default: new mongoose.Types.ObjectId
-  },
+  // _id: {
+  //   type: Schema.Types.ObjectId,
+  //   default: new mongoose.Types.ObjectId
+  // },
   reply: String,
   user: {
     type: Schema.Types.ObjectId,
@@ -73,10 +74,10 @@ const replySchema = new Schema({
 
 //Comment Schema to hold a main comment followed by a set of replies
 const commentSchema = new Schema({
-  _id: {
-    type: Schema.Types.ObjectId,
-    default: new mongoose.Types.ObjectId
-  },
+  // _id: {
+  //   type: Schema.Types.ObjectId,
+  //   default: new mongoose.Types.ObjectId
+  // },
   comment: String,
   replies: [{
     type: Schema.Types.ObjectId,
@@ -91,10 +92,10 @@ const commentSchema = new Schema({
 //Product Review Post Schema to hold the 
 //title, images, pros, cons, rating, date, and comments
 const productReviewPostSchema = new Schema({
-  _id: {
-    type: Schema.Types.ObjectId,
-    default: new mongoose.Types.ObjectId
-  },
+  // _id: {
+  //   type: Schema.Types.ObjectId,
+  //   default: new mongoose.Types.ObjectId
+  // },
   title: {
     type: String,
     required: 'Title is needed for product review post.'

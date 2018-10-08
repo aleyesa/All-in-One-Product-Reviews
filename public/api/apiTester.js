@@ -21,7 +21,7 @@ const createUser = () => {
       }),
       dataType: 'json',
       success: function (response) {
-        $('.userRequest .test').text(response);
+        $('.createUser .test').text(response);
       }
     });
   });
@@ -43,10 +43,10 @@ const updateUserById = () => {
     const updatedUsername = $('#updateUsername').val();
     const updatedPw = $('#updatePassword').val();
 
-    //create condition to see if text field is empty, if it is ignore.
+    //if all keys are empty dont request for any info
+    //just output that that there is nothing to update.
 
     const updatedFields = {};
-
     if(updatedFirstName !== ''){
       updatedFields.firstName = updatedFirstName;
     }
@@ -59,7 +59,7 @@ const updateUserById = () => {
     if(updatedPw !== ''){
       updatedFields.password = updatedPw;
     }
- 
+    
     $.ajax({
       contentType: 'application/json',
       type: 'PUT',
@@ -95,6 +95,8 @@ const deleteUserById = () => {
       },
       success: function (response) {
         $('.deleteUserById .test').text(response);
+        $('.deleteUserById .test p').text(`Directing to homepage.`);
+        sessionStorage.clear();
       }    
     });
   });
@@ -131,10 +133,15 @@ $('.getUserById').on('click', '.getUserByIdBtn', () => {
   $.ajax({
     contentType: 'application/json',
     type: 'GET',
-    url: `api/user/${userId}`,
+    url: `api/user/${sessionStorage.getItem('currUserId')}`,
     dataType: 'json',
     success: function (response) {
-      $('.getUserById .test').text(response);
+      console.log(response);
+      let groupResponseObj = '';
+      for(let keys in response) {
+        groupResponseObj += ' ' + response[`${keys}`];
+      }
+      $('.getUserById .test').text(groupResponseObj);
     }    
   });
 });
@@ -166,6 +173,13 @@ const login = () => {
   });
 };
 
+const logout = () => {
+  $('.logout').on('click', '.logoutBtn', () => {
+    $('.logout .test').text(`${sessionStorage.getItem('currUser')} has logged out.`);
+    sessionStorage.clear();
+  });
+}
+
 //Get Protected End point
 const testProtected = () => {
   $('.getToProtectedEndpoint').on('click', '.protectedEnd', () => {
@@ -178,12 +192,13 @@ const testProtected = () => {
         Authorization: `Bearer ${sessionStorage.getItem('currJWT')}`
       },
       success: function (response) {
-        $('.getToProtectedEndpoint .test').text(`userId: ${response.userId} username: ${response.username}`);
+        console.log(response.username);
+        console.log(response.userId);
         sessionStorage.setItem('currUser', response.username);
         currUser = sessionStorage.getItem('currUser');
         sessionStorage.setItem('currUserId', response.userId);
         currUserId = sessionStorage.getItem('currUserId');
-
+        $('.getToProtectedEndpoint .test').text(`userId: ${response.userId} username: ${response.username}`);
       }
     });
   });
@@ -201,6 +216,8 @@ const createNewJWT = () => {
         Authorization: `Bearer ${sessionStorage.getItem('currJWT')}`
       },
       success: function (response) {
+        sessionStorage.setItem('currJWT', response.authToken);
+        currJWT = sessionStorage.getItem('currJWT');
         $('.createNewJwtFromOld .test').text(response.authToken);
       }   
     });
@@ -253,29 +270,45 @@ const getPosts = () => {
         let combine = '';
         for(i = 0; i < response.length; i++)
         {
-          combine += response[i].toString();
+          combine += 
+          `
+          <li>
+            <a href="#clickedPost">${response[i].title}</a>
+            <p hidden>${response[i]._id}</p>
+          </li>
+          `;
         }
 
-        console.log(combine);
+        $('.getPosts .test ul').html(combine);
       }
     });
   });
 };
 
+const showPost = () => {
+  $('.getPosts ul').on('click', 'li', function() {
+    let postId = $(this).find('p').html();
+    sessionStorage.setItem('currClickedPostId', postId);
+    getPostById();
+  });
+};
+
 //Get Posts by Id
-const getPostById = () => {
-  $('.getPostById').on('click', '.getPostByIdBtn', () => {
-    let postId = '';
+const getPostById = (postId) => {
+    let combine = '';
+
     $.ajax({
       contentType: 'application/json',
       type: 'GET',
-      url: `api/post/${postId}`,
+      url: `api/post/${sessionStorage.getItem('currClickedPostId')}`,
       dataType: 'json',
       success: function (response) {
-        $('.getPostById .test').text(response);
+        for(let key in response) {
+          combine += `<p>${key}: ${response[key]}</p>`;
+        }
+        $('#clickedPost .test').html(combine);
       }    
     });
-  });
 };
 
 //Add a comment to a post by id
@@ -286,7 +319,7 @@ const addComment = () => {
     $.ajax({
       contentType: 'application/json',
       type: 'POST',
-      url: `/api/post/${postId}`,
+      url: `/api/post/${sessionStorage.getItem('currClickedPostId')}`,
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem('currJWT')}`
       },
@@ -387,11 +420,12 @@ const startApi = () => {
   getUser();
   getUserById();
   login();
+  logout();
   testProtected();
   createNewJWT();
   createPost();
   getPosts();
-  getPostById();
+  showPost();
   addComment();
   addReply();
   editPost();

@@ -78,15 +78,15 @@ const getPosts = (req, res) => {
   });
  };
 
-const findUser = (req) => User.findOne(req.username);
+const findUser = (username) => User.findOne({username: username});
 
 //Task: when creating post we link the user id.
 const createPost = (req, res) => {
-  console.log('Testing create post: ' + req.user);
+  console.log('Testing create post: ' + req.body);
   findUser(req)
   .then(user => { 
     req.body.user = user._id;
-
+    console.log(user);
     ProductReviewPost
       .create(req.body)
       .then(post => {
