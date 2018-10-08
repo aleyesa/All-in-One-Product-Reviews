@@ -27,7 +27,6 @@ const jwtStrategy = new Strategy({
   algorithms: ['HS256']
 },
 (payload, done) => {
-  console.log(payload);
   done(null, payload);
 }
 );

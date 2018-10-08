@@ -5,6 +5,7 @@ import {
 } from '../../../middleware/passportMiddleware';
 import { 
   registerUser,
+  getUserId,
   validateLogin,
   newJWT
 } from './authController';
@@ -22,10 +23,7 @@ authRouter.post('/auth/login',
 // GET /api/protected to make a request for a protected API endpoint. 
 // A valid, non-expired JWT is required. 
 // You use the same JWT to make as many requests as you like until it expires.
-authRouter.get('/protected', jwtAuthenticate, (req, res) => {
-  console.log(req.user.username);
-   return res.json(req.user);
-});
+authRouter.get('/protected', jwtAuthenticate, getUserId);
 
 // POST /api/auth/refresh to request a new JWT with a laster expiry date. A valid, non-expired JWT is required.
 authRouter.post('/auth/refresh', jwtAuthenticate, newJWT);

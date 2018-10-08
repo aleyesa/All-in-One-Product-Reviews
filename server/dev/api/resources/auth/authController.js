@@ -1,4 +1,5 @@
 import { User } from '../user/userModels';
+import { findUser } from '../user/userController';
 import jwt from 'jsonwebtoken';
 import {  
   JWT_SECRET,
@@ -69,9 +70,17 @@ const registerUser = (req, res) => {
 
 };
 
+const getUserId = (req, res) => {
+  findUser(req.user.username)
+  .then(user => res.json(
+    {
+      username: user.username,
+      userId: user._id
+    }));
+};
+
 //request a JWT/ A valid username and password are required, and a new token is given in exchange.
 const validateLogin = (req, res) => {
-  console.log(req.body.username);
   const authToken = createAuthToken(req.body.username);
   res.status(200).json({authToken});
 };
@@ -84,6 +93,7 @@ const newJWT = (req, res) => {
 
 export {
   registerUser,
+  getUserId,
   validateLogin,
   newJWT
 };

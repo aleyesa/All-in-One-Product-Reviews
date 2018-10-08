@@ -23,6 +23,8 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     default: new mongoose.Types.ObjectId
   },
+  firstName: String,
+  lastName: String,
   username: { 
     type: String,
     required: 'Username is required.',

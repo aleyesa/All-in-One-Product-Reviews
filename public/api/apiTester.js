@@ -1,5 +1,6 @@
 let currJWT = '';
 let currUser = '';
+let currUserId = '';
 
 //Creating User
 const createUser = () => {
@@ -27,27 +28,49 @@ const createUser = () => {
 };
 
 //Update User by Id
+/*
+get currently logged in username
+//create a request to get user id by there unique username
+//once we have currently logged in user id
+//we can use the updateUserById request
+*/
 const updateUserById = () => {
   $('.updateUserById').on('submit', () => {
+    event.preventDefault();
+    event.stopPropagation();
+    const updatedFirstName = $('#updateFirstName').val();
+    const updatedLastName = $('#updateLastName').val();
     const updatedUsername = $('#updateUsername').val();
     const updatedPw = $('#updatePassword').val();
-    const userId = '';
 
     //create condition to see if text field is empty, if it is ignore.
 
+    const updatedFields = {};
+
+    if(updatedFirstName !== ''){
+      updatedFields.firstName = updatedFirstName;
+    }
+    if(updatedLastName !== ''){
+      updatedFields.lastName = updatedLastName;
+    }
+    if(updatedUsername !== ''){
+      updatedFields.username = updatedUsername;
+    }
+    if(updatedPw !== ''){
+      updatedFields.password = updatedPw;
+    }
+ 
     $.ajax({
       contentType: 'application/json',
       type: 'PUT',
-      url: `api/user/${userId}`,
-      data: JSON.stringify({
-        username: updatedUsername,
-        password: updatedPw
-      }),
+      url: `api/user/${sessionStorage.getItem('currUserId')}`,
+      data: JSON.stringify(updatedFields),
       dataType: 'json',
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem('currJWT')}`
       },
       success: function (response) {
+        console.log(response);
         $('.updateUserById .test').text(response);
       }    
     });
@@ -55,12 +78,17 @@ const updateUserById = () => {
 };
 
 //Delete User by Id
+/*
+get username from session token
+find userid by username
+use delete userById request
+*/
 const deleteUserById = () => {
   $('.deleteUserById').on('click', '.delAccountBtn', () => {
     $.ajax({
       contentType: 'application/json',
       type: 'DELETE',
-      url: `api/user/${userId}`,
+      url: `api/user/${sessionStorage.getItem('currUserId')}`,
       dataType: 'json',
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem('currJWT')}`
@@ -82,7 +110,6 @@ const getUser = () => {
       url: `api/user`,
       dataType: 'json',
       success: function (response) {
-        console.log(response)
         for(let i = 0; i < response.length; i++){
          userList += `<li>${response[i].username}</li>`;
         }
@@ -95,6 +122,10 @@ const getUser = () => {
 };
 
 //Get User by Id
+//Implementation:
+//use get user request by username 
+//then get the response from that request
+//to get its id.
 const getUserById = () => {
 $('.getUserById').on('click', '.getUserByIdBtn', () => {
   $.ajax({
@@ -147,9 +178,12 @@ const testProtected = () => {
         Authorization: `Bearer ${sessionStorage.getItem('currJWT')}`
       },
       success: function (response) {
-        $('.getToProtectedEndpoint .test').text(response.username);
+        $('.getToProtectedEndpoint .test').text(`userId: ${response.userId} username: ${response.username}`);
         sessionStorage.setItem('currUser', response.username);
         currUser = sessionStorage.getItem('currUser');
+        sessionStorage.setItem('currUserId', response.userId);
+        currUserId = sessionStorage.getItem('currUserId');
+
       }
     });
   });

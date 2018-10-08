@@ -34,9 +34,13 @@ const getUser = (req, res) => {
 const updateUser = (req, res) => {
   //check if req body has unspecified keys
   User
-  .findByIdAndUpdate(req.params.id, req.body)
+  .findByIdAndUpdate(req.params.id, req.body, (err, update) => 
+    { 
+      return update;
+    }
+  )
   .select(['-password', '-__v'])
-  .then(user => res.json(user))
+  .then(update => res.json(update))
   .catch(err => res.status(400).json(err.message));
 };
 
@@ -174,5 +178,6 @@ export {
   deletePost,
   editPost,
   addComment,
-  addReply
+  addReply,
+  findUser
 };
